@@ -1,8 +1,11 @@
 package StrategyPattern;
 
+import java.util.logging.Logger;
+
 public class Paypal implements PaymentStrategy {
+    private static final Logger logger= Logger.getLogger(Paypal.class.getName());
     public void pay(int amount)
     {
-        System.out.println("Amount: "+ amount +" You paid in paypal");
+        logger.info("Amount: "+ amount +" You paid in paypal");
     }
 }

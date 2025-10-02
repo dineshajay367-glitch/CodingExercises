@@ -1,8 +1,11 @@
 package StrategyPattern;
 
+import java.util.logging.Logger;
+
 public class Phonepay implements PaymentStrategy {
+    private static final Logger logger= Logger.getLogger(Phonepay.class.getName());
     public void pay(int amount)
     {
-        System.out.println("Amount: "+ amount +" You paid in phone pay");
+        logger.info("Amount: "+ amount +" You paid in phone pay");
     }
 }
