@@ -9,6 +9,8 @@ public class StrategyPatternMain {
         paymentmethod.payAmount(1000);
         paymentmethod.ChangePaymentmethod(new Paypal());
         paymentmethod.payAmount(2000);
+        paymentmethod.ChangePaymentmethod(new Paypal());
+        paymentmethod.payAmount(2500);
 
 
 
