@@ -1,5 +1,7 @@
 package CompositePattern;
 
+import java.util.logging.Logger;
+
 public class Developer implements Employee{
     private String name;
     public Developer(String name)

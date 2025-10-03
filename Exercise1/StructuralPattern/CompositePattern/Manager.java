@@ -1,5 +1,7 @@
 package CompositePattern;
 import java.util.*;
+import java.util.logging.Logger;
+
 public class Manager implements Employee{
     private String name;
     private List<Employee>employees=new ArrayList<>();
