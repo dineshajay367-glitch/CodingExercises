@@ -1,12 +1,14 @@
 package Project;
 import java.util.*;
+import java.util.logging.Logger;
+
 public class AstronautScheduleApp {
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
-        ScheduleManager instance = ScheduleManager.getInstance();
+        ScheduleManager manager = ScheduleManager.getInstance();
         Observer astronaut = new Astronaut();
-        instance.addObserver(astronaut);
+        manager.addObserver(astronaut);
         boolean flag = true;
 
         while(flag)
@@ -44,14 +46,14 @@ public class AstronautScheduleApp {
                     String EndTime = sc.nextLine();
                     System.out.print("Enter priority (High/Medium/Low): ");
                     String Priority = sc.nextLine();
-                    instance.addTask(Description, StartTime, EndTime, Priority);
+                    manager.addTask(Description, StartTime, EndTime, Priority);
                     break;
                 }
                 case 2:
                 {
                     System.out.print("Enter task description to remove: ");
                     String Description = sc.nextLine();
-                    instance.removeTask(Description);
+                    manager.removeTask(Description);
                     break;
                 }
                 case 3:
@@ -63,7 +65,7 @@ public class AstronautScheduleApp {
                     try
                     {
                         int view=Integer.parseInt(sc.nextLine());
-                        instance.viewTask(view);
+                        manager.viewTask(view);
                     }
                     catch(Exception e)
                     {
@@ -104,7 +106,7 @@ public class AstronautScheduleApp {
                         {
                             System.out.println("Error: Invalid option");
                         }
-                        instance.editTask(Description, changes, newChanges);
+                        manager.editTask(Description, changes, newChanges);
                     }
                     catch(InputMismatchException e)
                     {

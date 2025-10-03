@@ -2,10 +2,14 @@ package Project;
 
 import java.util.*;
 import java.time.LocalTime;
+import java.util.logging.Logger;
+
 public class ScheduleManager {
+    private static final Logger logger= Logger.getLogger(ScheduleManager.class.getName());
     private static ScheduleManager instance;
     private ScheduleManager()
     {
+        logger.info("Instance is Created");
     }
     public static ScheduleManager getInstance()
     {
@@ -36,7 +40,7 @@ public class ScheduleManager {
 
             if(LocalTime.parse(newtask.startTime).isAfter(LocalTime.parse(newtask.endTime)))
             {
-                System.out.println("Error: Invalid task time");
+                logger.warning("Error: Invalid task time");
                 return;
             }
             else
@@ -54,7 +58,7 @@ public class ScheduleManager {
                         {
                             astronauts.get(j).conflictNotification(task.get(i).description, newtask.description);
                         }
-                        System.out.println("Error: Task time conflicts with an existing task");
+                        logger.severe("Error: Task time conflicts with an existing task");
                         return;
                     }
                 }
@@ -62,7 +66,7 @@ public class ScheduleManager {
                         !newtask.priority.equalsIgnoreCase("low") &&
                         !newtask.priority.equalsIgnoreCase("medium"))
                 {
-                    System.out.println("Error: Invalid priority level");
+                    logger.warning("Error: Invalid priority level");
                     return;
                 }
 
@@ -73,16 +77,16 @@ public class ScheduleManager {
                 {
                     astronauts.get(i).addTaskNotification(newtask.description);
                 }
-                System.out.println("Task added successfully");
+                logger.info("Task added successfully");
             }
         }
         catch(IllegalArgumentException e)
         {
-            System.out.println("Error: Description already exists");
+            logger.severe("Error: Description already exists");
         }
         catch(Exception e)
         {
-            System.out.println("Error: Enter start and end times in HH:MM format");
+            logger.severe("Error: Enter start and end times in HH:MM format");
         }
     }
     public void removeTask(String description)
@@ -92,7 +96,7 @@ public class ScheduleManager {
             if(task.get(i).getDescription().equalsIgnoreCase(description))
             {
                 task.remove(i);
-                System.out.println("Task removed successfully");
+                logger.info("Task removed successfully");
                 for(int j = 0; j < astronauts.size(); j++)
                 {
                     astronauts.get(j).removeTaskNotification(description);
@@ -100,13 +104,13 @@ public class ScheduleManager {
                 return;
             }
         }
-        System.out.println("Error: Task not found");
+        logger.warning("Error: Task not found");
     }
     public void viewTask(int view)
     {
         if(task.size() == 0)
         {
-            System.out.println("No tasks scheduled for the day");
+            logger.info("No tasks scheduled for the day");
             return;
         }
         boolean flag=false;
@@ -138,13 +142,13 @@ public class ScheduleManager {
             }
             if(flag==false)
             {
-                System.out.println("No Task is Available");
+                logger.info("No Task is Available");
             }
 
         }
         else
         {
-            System.out.println("Invalid No");
+            logger.warning("Invalid No");
         }
     }
     public void editTask(String description,int changes,String newChanges)
@@ -159,7 +163,7 @@ public class ScheduleManager {
                     {
                         if(task.get(j).description.equalsIgnoreCase(newChanges) && i != j)
                         {
-                            System.out.println("Error: Description already exists");
+                            logger.warning("Error: Description already exists");
                             return;
                         }
                     }
@@ -190,17 +194,17 @@ public class ScheduleManager {
                         }
                         else
                         {
-                            System.out.println("Error: Invalid time range");
+                            logger.warning("Error: Invalid time range");
                             return;
                         }
                     }
                     catch(IllegalArgumentException e)
                     {
-                        System.out.println("Error: Task time conflicts with another task");
+                        logger.severe("Error: Task time conflicts with another task");
                     }
                     catch(Exception e)
                     {
-                        System.out.println("Error: Invalid time format");
+                        logger.warning("Error: Invalid time format");
                         return;
                     }
                 }
@@ -208,7 +212,7 @@ public class ScheduleManager {
                 {
                     task.get(i).priority = newChanges;
                 }
-                System.out.println("Task updated successfully");
+                logger.info("Task updated successfully");
                 for(int j = 0; j < astronauts.size(); j++)
                 {
                     astronauts.get(j).updateTaskNotification(description, newChanges);
@@ -216,6 +220,6 @@ public class ScheduleManager {
                 return;
             }
         }
-        System.out.println("Error: Invalid description");
+        logger.warning("Error: Invalid description");
     }
 }
