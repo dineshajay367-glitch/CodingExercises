@@ -112,6 +112,10 @@ public class AstronautScheduleApp {
                     {
                         System.out.println("Error: Invalid input for changes");
                     }
+                    catch(Exception e)
+                    {
+                        System.out.println("Error: Invalid input for changes");
+                    }
                     break;
                 }
                 case 5:
