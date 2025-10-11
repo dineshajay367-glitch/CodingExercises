@@ -12,7 +12,7 @@ public class Users implements Customers {
     @Override
     public void notify(String product)
     {
-        System.out.println("[Notification] " + name +
+        logger.info("[Notification] " + name +
                 ", the product " + product + " is now available!");
 
     }

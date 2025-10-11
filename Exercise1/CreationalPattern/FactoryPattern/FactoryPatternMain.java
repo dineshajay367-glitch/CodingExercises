@@ -9,5 +9,6 @@ public class FactoryPatternMain {
     task2.task();
     Task task3=new ImprovementFactory().getTask();
     task3.task();
+
     }
 }

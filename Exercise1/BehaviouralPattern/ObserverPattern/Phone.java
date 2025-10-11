@@ -26,7 +26,14 @@ public class Phone implements Product {
     {
         for(Customers customer: customers)
         {
-            new Thread(() -> customer.notify(productname)).start();
+            Runnable task=new Runnable(){
+                @Override
+                public void run() {
+                    customer.notify(productname);
+                }
+            };
+            Thread thread=new Thread(task);
+            thread.start();
         }
     }
 }
